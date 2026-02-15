@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mundo de Ximena</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraft-ia" rel="stylesheet">
+    <style>
+        :root {
+            --mc-gui: #C6C6C6;
+            --mc-border-light: #FFFFFF;
+            --mc-border-dark: #555555;
+            --mc-xp: #7cfc00;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; min-height: 100vh;
+            background-color: #1a1a1a;
+            font-family: 'Minecraftia', sans-serif;
+            color: white;
+            image-rendering: pixelated;
+        }
+
+        /* 1. CARGA */
+        #loading-screen {
+            position: fixed; inset: 0;
+            background: #2c2c2c;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 10000;
+        }
+        .mc-bar { width: 260px; height: 20px; border: 4px solid #808080; background: #000; margin-top: 15px; }
+        #fill { width: 0%; height: 100%; background: #5AA514; }
+
+        /* 2. MUNDO */
+        #world {
+            display: none;
+            position: relative;
+            width: 100%; min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://i.imgur.com/G20YV2p.png'); /* Fondo estable */
+            background-size: cover; background-position: center;
+            background-attachment: fixed;
+            padding-bottom: 200px;
+        }
+
+        /* 3. HUD (CORAZONES Y XP) */
+        .hud {
+            position: fixed; bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 340px; z-index: 9000;
+        }
+        .stats-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 16px; }
+        .xp-bar { width: 100%; height: 10px; background: rgba(0,0,0,0.8); border: 2px solid #000; position: relative; }
+        #xp-fill { width: 0%; height: 100%; background: var(--mc-xp); transition: width 2s ease; }
+        .level { position: absolute; width: 100%; text-align: center; top: -22px; color: var(--mc-xp); text-shadow: 2px 2px #000; font-size: 18px; }
+
+        /* 4. LIBRO ENCANTADO REALISTA */
+        #book {
+            display: none;
+            position: fixed; top: 45%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 90%; max-width: 360px; height: 280px;
+            background: #e6d3a8; border: 6px solid #4a3018;
+            box-shadow: 0 0 50px #000, 10px 10px 0px rgba(0,0,0,0.4);
+            z-index: 9500; padding: 15px; color: #303030;
+            transition: transform 0.5s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+        }
+        .book-content { display: flex; height: 100%; gap: 10px; }
+        .page { flex: 1; font-size: 10px; overflow-y: auto; line-height: 1.4; white-space: pre-wrap; }
+
+        /* 5. COFRE */
+        .content { text-align: center; padding-top: 40px; }
+        .btn-mc {
+            background: var(--mc-gui); border: 4px solid;
+            border-color: #FFF #555 #555 #FFF;
+            padding: 12px; font-family: 'Minecraftia'; cursor: pointer;
+            margin-bottom: 20px; font-size: 12px;
+        }
+        #chest { width: 100px; cursor: pointer; display: none; margin: 20px auto; filter: drop-shadow(0 10px 10px #000); }
+        .pics { display: none; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .pics img { width: 90px; height: 90px; border: 4px solid #fff; object-fit: cover; box-shadow: 4px 4px 0 #000; }
+    </style>
+</head>
+<body>
+
+    <div id="loading-screen">
+        <div id="load-txt">Cargando mundo...</div>
+        <div class="mc-bar"><div id="fill"></div></div>
+    </div>
+
+    <div id="world">
+        <div class="content">
+            <button class="btn-mc" onclick="start()">🎵 TOCAR MÚSICA</button>
+            <br>
+            <img id="chest" src="https://i.imgur.com/83p73u5.png" onclick="openChest()">
+            <div class="pics" id="pics">
+                <img src="foto1.jpg" alt="1">
+                <img src="foto2.jpg" alt="2">
+                <img src="foto3.jpg" alt="3">
+            </div>
+        </div>
+
+        <div id="book">
+            <div class="book-content">
+                <div class="page"><b>MENSAJE PARA XIMENA:</b>
+
+Hola! 👋 🌻✨, quiero darte el detalle de darte flores amarillas 💐💛, pues habías dicho que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊.</div>
+                <div style="width:2px; background:rgba(0,0,0,0.1)"></div>
+                <div class="page">Dijiste que no eras mucho de recibir este tipo de regalos 🎁🙅‍♀️ y quise regalarte volver a dar te unas flores por el 21 de marzo🌻 y de paso un peluche 🧸💖. Espero y te guste 🌻🧸✨🙌.
+
+Te las 💐 doy algo temprano ☀️ porque tu novio te tiene que dar unas igual y no quiero incomodar❤️.</div>
+            </div>
+        </div>
+
+        <div class="hud">
+            <div class="stats-row">
+                <div>❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
+                <div>🍗🍗🍗🍗🍗🍗🍗🍗🍗🍗</div>
+            </div>
+            <div class="xp-bar">
+                <div class="level">99</div>
+                <div id="xp-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio" src="https://www.myinstants.com/media/sounds/minecraft-level-up.mp3"></audio>
+
+    <script>
+        let p = 0;
+        let fill = document.getElementById('fill');
+        let txt = document.getElementById('load-txt');
+        let frases = ["Cargando mundo...", "Generando terreno...", "Entrando al mundo de Ximena..."];
+
+        let load = setInterval(() => {
+            p += 2;
+            fill.style.width = p + "%";
+            if(p > 30) txt.innerText = frases[1];
+            if(p > 70) txt.innerText = frases[2];
+            if(p >= 100) {
+                clearInterval(load);
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('world').style.display = 'block';
+            }
+        }, 35);
+
+        function start() {
+            document.getElementById('audio').play();
+            document.getElementById('xp-fill').style.width = "100%";
+            
+            setTimeout(() => {
+                let b = document.getElementById('book');
+                b.style.display = 'block';
+                setTimeout(() => b.style.transform = 'translate(-50%, -50%) scale(1)', 50);
+            }, 800);
+
+            setTimeout(() => {
+                document.getElementById('chest').style.display = 'block';
+            }, 2000);
+        }
+
+        function openChest() {
+            document.getElementById('chest').style.transform = 'scale(1.2) rotate(5deg)';
+            document.getElementById('pics').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
