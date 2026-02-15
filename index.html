@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ximenita 🌻</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.transparenttextures.com/patterns/minecraft-dirt.png');
+            background-color: #48b02b; /* Verde pasto */
+            font-family: 'Press Start 2P', cursive;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            text-shadow: 2px 2px #000;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border: 4px solid #555;
+            outline: 4px solid #000;
+            max-width: 600px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            color: #ffff55; /* Color amarillo Minecraft (Gold) */
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.8;
+            font-size: 0.7rem;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: #55ff55; /* Verde esmeralda */
+            text-decoration: underline;
+        }
+
+        .love-text {
+            color: #ff5555; /* Rojo corazón */
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        img {
+            width: 100%;
+            border: 4px solid #fff;
+            image-rendering: pixelated; /* Efecto retro */
+        }
+
+        /* Botón estilo Minecraft UI */
+        .mc-button {
+            background: #aaaaaa;
+            border: 4px solid #000;
+            border-top-color: #fff;
+            border-left-color: #fff;
+            color: #373737;
+            padding: 15px 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: inset -4px -4px 0px #555;
+            transition: all 0.1s;
+        }
+
+        .mc-button:hover {
+            background: #888;
+            color: #fff;
+        }
+
+        .mc-button:active {
+            box-shadow: inset 4px 4px 0px #555;
+            transform: translateY(2px);
+        }
+
+        .flower-icon {
+            font-size: 2rem;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="flower-icon">🌻💐🧸</div>
+        <h1>¡Logro obtenido! <br> <span style="color: #fff;">"Detalle Especial"</span></h1>
+        
+        <p>
+            Hola! 👋 🌻✨, quiero darte el detalle de darte <span class="highlight">flores amarillas 💐💛</span>, 
+            pues habías dicho que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊. 
+            Dijiste que no eras mucho de recibir este tipo de regalos 🎁🙅‍♀️ y quise regalarte volver a darte 
+            unas flores por el <span class="highlight">21 de marzo🌻</span> y de paso un peluche 🧸💖.
+        </p>
+
+        <div class="photo-gallery">
+            <img src="IMG_2514.jpeg" alt="Nuestra Foto 1">
+            <img src="imagen2.jpg" alt="Flores Amarillas"> <img src="imagen3.jpg" alt="Peluche"> </div>
+
+        <p>
+            Pues me hace sentir muy bien el saber que <span class="love-text">te hice sentir feliz ✨🌈</span> 
+            y que te gustó el regalo 🎁💫. El hecho de escribirte es suficiente ✨✍️, no necesito nada a cambio 😇💖. 
+            Espero y te guste 🌻🧸✨🙌.
+        </p>
+
+        <p style="font-size: 0.6rem; color: #aaa;">
+            Te las 💐 doy algo temprano ☀️ porque, pues, es algo obvio ✨ que tu novio te tiene que dar unas igual 🎁 y no quiero incomodar❤️.
+        </p>
+
+        <button class="mc-button" onclick="playAudio()">
+            [ REPRODUCIR AUDIO ]
+        </button>
+
+        <audio id="myAudio">
+            <source src="Ximenita.mp3" type="audio/mpeg">
+            Tu navegador no soporta el audio.
+        </audio>
+
+        <p style="margin-top: 20px; color: #ff55ff;">Gracias por existir ✨</p>
+    </div>
+
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
+
+</body>
+</html>
