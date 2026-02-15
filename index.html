@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Un regalo para ti! 🌻</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.transparenttextures.com/patterns/dirt.png'), linear-gradient(#5a8c43, #3a5c2d);
+            background-color: #5a8c43;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Minecraftia', sans-serif;
+            color: white;
+            text-shadow: 2px 2px #373737;
+        }
+
+        .mc-container {
+            background-color: #c6c6c6;
+            border: 4px solid #000;
+            border-top-color: #fff;
+            border-left-color: #fff;
+            border-bottom-color: #555;
+            border-right-color: #555;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffff55; /* Color amarillo de Minecraft */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 2px solid #373737;
+            padding: 20px;
+            text-align: left;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .items-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .inventory-slot {
+            width: 64px;
+            height: 64px;
+            background-color: #8b8b8b;
+            border: 4px solid #373737;
+            border-top-color: #555;
+            border-left-color: #555;
+            border-bottom-color: #fff;
+            border-right-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+        }
+
+        .btn-minecraft {
+            margin-top: 20px;
+            background-color: #6a6a6a;
+            border: 3px solid #000;
+            border-top-color: #afafaf;
+            border-left-color: #afafaf;
+            border-bottom-color: #3f3f3f;
+            border-right-color: #3f3f3f;
+            color: #e0e0e0;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Minecraftia', sans-serif;
+            transition: all 0.1s;
+        }
+
+        .btn-minecraft:hover {
+            background-color: #538e35;
+            border-top-color: #79c05a;
+            border-left-color: #79c05a;
+            border-bottom-color: #2e521c;
+            border-right-color: #2e521c;
+            color: #fff;
+        }
+
+        .footer-note {
+            font-size: 10px;
+            margin-top: 15px;
+            color: #373737;
+            text-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mc-container">
+        <h1>¡NUEVO ITEM RECIBIDO!</h1>
+
+        <div class="items-row">
+            <div class="inventory-slot" title="Flores Amarillas">🌻</div>
+            <div class="inventory-slot" title="Peluche">🧸</div>
+            <div class="inventory-slot" title="Amistad">💖</div>
+        </div>
+
+        <div class="message">
+            Hola! 👋 🌻✨, quiero darte el detalle de darte flores amarillas 💐💛, pues habías dicho que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊.<br><br>
+            Dijiste que no eras mucho de recibir este tipo de regalos 🎁🙅‍♀️ y quise regalarte volver a darte unas flores por el 21 de marzo 🌻 y de paso un peluche 🧸💖. Pues me hace sentir muy bien el saber que te hice sentir feliz ✨🌈 y que te gustó el regalo 🎁💫.<br><br>
+            El hecho de escribirte es suficiente ✨✍️, no necesito nada a cambio 😇💖. Espero y te guste 🌻🧸✨🙌.
+        </div>
+
+        <p style="color: #ff5555; margin-top: 15px;">
+            Te las doy algo temprano ☀️ porque es obvio que tu novio te tiene que dar unas igual y no quiero incomodar ❤️.
+        </p>
+
+        <button class="btn-minecraft" onclick="alert('¡Regalo guardado en el inventario!')">CERRAR MENÚ</button>
+        
+        <div class="footer-note">Hecho con bloques de cariño v1.0</div>
+    </div>
+
+</body>
+</html>
