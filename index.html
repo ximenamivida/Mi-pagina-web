@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ximenita 🌻</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1e1e1e; /* Fondo oscuro sólido para evitar errores en GitHub */
+            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Contenedor principal estilo Interfaz de Minecraft */
+        .mc-dialog {
+            background-color: #C6C6C6;
+            border-top: 4px solid #ffffff;
+            border-left: 4px solid #ffffff;
+            border-right: 4px solid #555555;
+            border-bottom: 4px solid #555555;
+            padding: 20px;
+            max-width: 500px;
+            box-shadow: 0 10px 0 #000;
+            margin-top: 20px;
+        }
+
+        .mc-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border: 4px solid #373737;
+            color: #fff;
+            text-shadow: 2px 2px #000;
+            line-height: 1.8;
+            font-size: 12px;
+        }
+
+        h1 {
+            color: #ffff55; /* Color Oro Minecraft */
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Galería de Imágenes estilo Slots de Inventario */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .slot {
+            background-color: #8b8b8b;
+            border: 3px solid #373737;
+            border-top-color: #555;
+            border-left-color: #555;
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slot img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        /* Botón de Audio Estilo Minecraft */
+        .mc-button {
+            background-color: #8b8b8b;
+            border: 4px solid;
+            border-color: #dbdbdb #555555 #555555 #dbdbdb;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            font-family: 'Press Start 2P', cursive;
+            cursor: pointer;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .mc-button:active {
+            border-color: #555555 #dbdbdb #dbdbdb #555555;
+            padding-top: 17px;
+            padding-bottom: 13px;
+        }
+
+        /* Corazones parpadeantes */
+        .hearts {
+            color: #ff5555;
+            font-size: 20px;
+            margin: 10px 0;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .highlight { color: #55ff55; } /* Verde esmeralda */
+        .yellow { color: #ffff55; }    /* Amarillo flores */
+    </style>
+</head>
+<body>
+
+    <div class="hearts">❤❤❤❤❤❤❤❤❤❤</div>
+
+    <div class="mc-dialog">
+        <h1>[AVISO DE FLORES AMARILLAS]</h1>
+        
+        <div class="mc-content">
+            <p>Hola! 👋 <span class="yellow">🌻✨</span>, quiero darte el detalle de darte <span class="yellow">flores amarillas 💐💛</span>, pues habías dicho que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊.</p>
+            
+            <p>Dijiste que no eras mucho de recibir este tipo de regalos 🎁🙅‍♀️ y quise regalarte volver a dar te unas flores por el <span class="highlight">21 de marzo 🌻</span> y de paso un <span class="highlight">peluche 🧸💖</span>.</p>
+
+            <div class="inventory-grid">
+                <div class="slot"><img src="IMG_2511.jpeg" alt="Foto 1"></div>
+                <div class="slot"><img src="IMG_2513.jpeg" alt="Foto 2"></div>
+                <div class="slot"><img src="IMG_2514.jpeg" alt="Foto 3"></div>
+                <div class="slot"><img src="IMG_2511.jpeg" alt="Foto 4"></div> </div>
+
+            <p>Pues me hace sentir muy bien el saber que te hice sentir feliz ✨🌈 y que te gustó el regalo 🎁💫. El hecho de escribirte es suficiente ✨✍️, no necesito nada a cambio 😇💖. Espero y te guste 🌻🧸✨🙌.</p>
+
+            <p style="font-size: 10px; color: #aaa;">Te las 💐 doy algo temprano ☀️ porque, pues, es algo obvio ✨ que tu novio te tiene que dar unas igual 🎁 y no quiero incomodar❤️.</p>
+        </div>
+
+        <audio id="musica" src="Ximenita.mp3"></audio>
+        <button class="mc-button" onclick="document.getElementById('musica').play()">▶ REPRODUCIR: Ximenita.mp3</button>
+    </div>
+
+    <div class="hearts" style="margin-top: 20px;">❤❤❤❤❤❤❤❤❤❤</div>
+
+</body>
+</html>
