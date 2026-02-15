@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Ximenita ✨</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+    <style>
+        /* FONDO DE PASTO DINÁMICO (Sin imágenes, para que nunca falle en GitHub) */
+        body {
+            background-color: #5aa35a;
+            background-image: 
+                linear-gradient(45deg, #4e904e 25%, transparent 25%), 
+                linear-gradient(-45deg, #4e904e 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #4e904e 75%), 
+                linear-gradient(-45deg, transparent 75%, #4e904e 75%);
+            background-size: 40px 40px;
+            font-family: 'Minecraftia', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        /* LOGRO CON DIAMANTE */
+        .achievement {
+            background: #212121;
+            border: 4px solid #000;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            width: 95%;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.4);
+            box-sizing: border-box;
+        }
+
+        /* BOTÓN DE AUDIO ENCANTADO */
+        .enchanted-btn {
+            width: 95%;
+            background: #4a008a;
+            color: #fff;
+            border: 4px solid #000;
+            border-top-color: #c077ff;
+            border-left-color: #c077ff;
+            padding: 22px;
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0px 8px 0px #2a004f;
+            cursor: pointer;
+        }
+
+        .enchanted-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -100%; width: 200%; height: 200%;
+            background: linear-gradient(115deg, transparent, rgba(200,100,255,0.3), transparent);
+            animation: enchant 3s infinite linear;
+        }
+
+        @keyframes enchant { 0% { left: -120%; } 100% { left: 120%; } }
+
+        /* CONTENEDOR TIPO COFRE / INVENTARIO */
+        .gui-chest {
+            background: #C6C6C6;
+            border: 4px solid #000;
+            box-shadow: inset -4px -4px #555, inset 4px 4px #FFF;
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            color: #3f3f3f;
+        }
+
+        .slot {
+            background: #8B8B8B;
+            border: 3px solid #373737;
+            border-top-color: #000;
+            border-left-color: #000;
+            margin-bottom: 25px;
+            padding: 5px;
+            position: relative;
+        }
+
+        .date-label {
+            position: absolute;
+            top: -14px; right: 8px;
+            background: #ffff55;
+            border: 2px solid #000;
+            padding: 2px 8px;
+            font-size: 10px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        img { 
+            width: 100%; 
+            border: 2px solid #3f3f3f; 
+            image-rendering: pixelated; 
+            display: block;
+        }
+
+        /* TU TEXTO ORIGINAL */
+        .chat-text {
+            background: rgba(0,0,0,0.85);
+            color: #FFF;
+            padding: 18px;
+            border: 3px solid #555;
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: left;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        /* CARTEL COLGANTE (HANGING SIGN) ACTUALIZADO */
+        .hanging-sign-wrap {
+            margin: 40px 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chain-container {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            margin-bottom: -5px;
+        }
+
+        .chain-link {
+            width: 8px;
+            height: 25px;
+            background: #373737;
+            border: 2px solid #000;
+        }
+
+        .sign-modern {
+            background: #4e321e; /* Madera oscura de abeto */
+            border: 4px solid #2a1a0f;
+            box-shadow: inset 4px 4px 0px #6d4a2f, inset -4px -4px 0px #352114;
+            padding: 20px;
+            color: #e0e0e0;
+            text-align: center;
+            font-size: 12px;
+            width: 90%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* PARTÍCULAS */
+        .particle {
+            position: fixed;
+            pointer-events : none;
+            z-index: 1000;
+            animation: floatUp 1.8s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-200px); opacity: 0; }
+        }
+    </style>
+</head>
+<body onclick="spawnParticle(event)">
+
+    <div class="achievement">
+        <span style="font-size: 32px; margin-right: 15px;">💎</span>
+        <div>
+            <div style="color: #55ff55; font-size: 11px;">Logro realizado!</div>
+            <div style="color: #fff; font-size: 12px;">Eres la niña más hermosa ✨</div>
+        </div>
+    </div>
+
+    <button class="enchanted-btn" onclick="startExperience(event)">
+        [ REPRODUCIR AUDIO ] 🔊
+    </button>
+
+    <div class="gui-chest">
+        <div class="slot">
+            <span class="date-label">21-3-2026</span>
+            <img src="imagen2.jpg">
+        </div>
+        <div class="slot">
+            <span class="date-label">21-3-2026</span>
+            <img src="imagen3.jpg">
+        </div>
+        <div class="slot">
+            <span class="date-label">12-2-2026</span>
+            <img src="IMG_2514.jpeg">
+        </div>
+
+        <div class="chat-text">
+            Hola! 👋  🌻✨, quiero darte el detalle de darte flores amarillas 💐💛, pues habías dicho que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊. Dijiste que no eras mucho de recibir este tipo de regalos 🎁🙅‍♀️ y quise regalarte volver a dar te  unas flores por el 21 de marzo🌻 y de paso un peluche 🧸💖. Pues me hace sentir muy bien el saber que te hice sentir feliz ✨🌈 y que te gustó el regalo 🎁💫. El hecho de escribirte es suficiente ✨✍️, no necesito nada a cambio 😇💖. Espero y te guste 🌻🧸✨🙌.
+            <br><br>
+            Te las 💐 doy algo temprano ☀️ porque, pues, es algo obvio ✨ que tu novio te tiene que dar unas igual 🎁 y no quiero incomodar❤️.
+        </div>
+    </div>
+
+    <div class="hanging-sign-wrap">
+        <div class="chain-container">
+            <div class="chain-link"></div>
+            <div class="chain-link"></div>
+        </div>
+        <div class="sign-modern">
+            Ya me lo dijiste y me lo dejaste en claro y no soy nadie para hacerte cambiar de opinión pero espero y en serio algún día se dé algo igual tipo Minecraft.
+        </div>
+    </div>
+
+    <div style="margin-bottom: 40px; color: #ffff55; font-size: 12px; text-shadow: 2px 2px #000;">
+        💎 Gracias por existir 💎
+    </div>
+
+    <audio id="audio"><source src="Ximenita.mp3" type="audio/mpeg"></audio>
+
+    <script>
+        function startExperience(e) {
+            e.stopPropagation();
+            document.getElementById('audio').play();
+            // Lluvia masiva de flores y diamantes
+            for(let i=0; i<20; i++) {
+                setTimeout(() => spawnParticle({
+                    clientX: Math.random() * window.innerWidth,
+                    clientY: window.innerHeight * 0.8,
+                    forceIcon: Math.random() > 0.5 ? '🌻' : '💎'
+                }), i * 100);
+            }
+        }
+
+        function spawnParticle(e) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.innerHTML = e.forceIcon || (Math.random() > 0.5 ? '❤️' : '✨');
+            p.style.left = (e.clientX || Math.random() * window.innerWidth) + 'px';
+            p.style.top = (e.clientY || Math.random() * window.innerHeight) + 'px';
+            p.style.fontSize = '26px';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 1800);
+        }
+    </script>
+</body>
+</html>
