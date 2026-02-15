@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>§dPara Alguien Especial ✨</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.transparenttextures.com/patterns/minecraft-dirt.png');
+            background-color: #31a021;
+            font-family: 'Minecraftia', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            margin: 0;
+            overflow-x: hidden;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        /* BANNER DE LOGRO: "ENCUENTRO LEGENDARIO" */
+        .achievement {
+            background: #212121;
+            border: 3px solid #000;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            width: 90%;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+        }
+
+        .achievement-icon {
+            width: 35px;
+            height: 35px;
+            margin-right: 12px;
+            image-rendering: pixelated;
+        }
+
+        /* BOTÓN ENCANTADO */
+        .enchanted-btn {
+            width: 95%;
+            background: #4a008a;
+            color: #fff;
+            border: 4px solid #000;
+            border-top-color: #c077ff;
+            border-left-color: #c077ff;
+            padding: 22px;
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0px 8px 0px #2a004f;
+        }
+
+        .enchanted-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -100%;
+            width: 200%; height: 200%;
+            background: linear-gradient(115deg, transparent, rgba(200,100,255,0.4), transparent);
+            animation: enchant 2.5s infinite linear;
+        }
+
+        @keyframes enchant { 0% { left: -120%; } 100% { left: 120%; } }
+
+        /* INTERFAZ DE COFRE (GUI) */
+        .gui-container {
+            background: #C6C6C6;
+            border: 4px solid #000;
+            box-shadow: inset -4px -4px #555, inset 4px 4px #FFF;
+            padding: 15px;
+            width: 95%;
+            box-sizing: border-box;
+            color: #3f3f3f;
+            text-shadow: none;
+        }
+
+        .item-slot {
+            background: #8B8B8B;
+            border: 3px solid #373737;
+            border-top-color: #000;
+            border-left-color: #000;
+            margin-bottom: 25px;
+            padding: 6px;
+            position: relative;
+        }
+
+        .date-tag {
+            position: absolute;
+            top: -14px;
+            right: 10px;
+            background: #55ffff; /* Color diamante */
+            border: 2px solid #000;
+            padding: 3px 8px;
+            font-size: 10px;
+            color: #000;
+        }
+
+        img { width: 100%; height: auto; image-rendering: pixelated; }
+
+        /* CUADRO DE TEXTO ESTILO CHAT */
+        .chat-box {
+            background: rgba(20,20,20,0.95);
+            color: #FFF;
+            padding: 18px;
+            border: 3px solid #555;
+            font-size: 13px;
+            line-height: 1.7;
+            text-shadow: 2px 2px #000;
+        }
+
+        .c-gold { color: #ffff55; }
+        .c-pink { color: #ff55ff; }
+        .c-aqua { color: #55ffff; }
+        .c-green { color: #55ff55; }
+
+        /* CORAZONES */
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: floatUp 1.2s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-120px) scale(1.8); opacity: 0; }
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 10px;
+            color: #ffff55;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onclick="spawnHeart(event)">
+
+    <div class="achievement">
+        <img src="https://minecraft.wiki/images/Totem_of_Undying_JE2_BE2.png" class="achievement-icon">
+        <div>
+            <div style="color: #55ff55; font-size: 10px;">§aLogro realizado:</div>
+            <div style="color: #fff; font-size: 11px;">Encontré a mi persona favorita ✨</div>
+        </div>
+    </div>
+
+    <button class="enchanted-btn" onclick="playSecret(event)">
+        [ PRESIONA PARA ESCUCHAR ] 🔊
+    </button>
+
+    <div class="gui-container">
+        
+        <div class="item-slot">
+            <span class="date-tag">§b21-3-2026</span>
+            <img src="imagen2.jpg">
+        </div>
+
+        <div class="item-slot">
+            <span class="date-tag">§b21-3-2026</span>
+            <img src="imagen3.jpg">
+        </div>
+
+        <div class="item-slot">
+            <span class="date-tag">§e12-2-2026</span>
+            <img src="IMG_2514.jpeg">
+        </div>
+
+        <div class="chat-box">
+            <span class="c-gold">§eHola! 👋 🌻✨</span>, quiero darte el detalle de darte flores amarillas 💐💛, pues habías dicho que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊.
+            <br><br>
+            Dijiste que no eras mucho de recibir este tipo de regalos 🎁🙅‍♀️ y quise regalarte volver a darte unas flores por el <span class="c-green">21 de marzo🌻</span> y de paso un peluche 🧸💖.
+            <br><br>
+            Me hace sentir muy bien el saber que <span class="c-pink">te hice sentir feliz ✨🌈</span> y que te gustó el regalo 🎁💫. El hecho de escribirte es suficiente ✨✍️, <span class="c-aqua">no necesito nada a cambio</span> 😇💖. Espero y te guste 🌻🧸✨🙌.
+            <br><br>
+            <span style="color: #aaa;">Te las 💐 doy algo temprano ☀️ porque, pues, es algo obvio ✨ que <span class="c-gold">alguien que te aprecie mucho</span> te tiene que dar unas igual y no quiero incomodar ❤️.</span>
+        </div>
+    </div>
+
+    <div class="footer-note">§k|||§r §eGracias por existir §k|||</div>
+
+    <audio id="ximenitaAudio"><source src="Ximenita.mp3" type="audio/mpeg"></audio>
+
+    <script>
+        function playSecret(e) {
+            e.stopPropagation();
+            document.getElementById("ximenitaAudio").play();
+            for(let i=0; i<12; i++) {
+                setTimeout(() => spawnHeart({
+                    clientX: Math.random() * window.innerWidth, 
+                    clientY: window.innerHeight * 0.7
+                }), i*80);
+            }
+        }
+
+        function spawnHeart(e) {
+            const heart = document.createElement('div');
+            heart.className = 'heart-particle';
+            heart.innerHTML = Math.random() > 0.5 ? '❤️' : '✨';
+            const x = e.clientX || (e.touches ? e.touches[0].clientX : Math.random() * window.innerWidth);
+            const y = e.clientY || (e.touches ? e.touches[0].clientY : Math.random() * window.innerHeight);
+            heart.style.left = x - 10 + 'px';
+            heart.style.top = y - 10 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1200);
+        }
+    </script>
+</body>
+</html>
