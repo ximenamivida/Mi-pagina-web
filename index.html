@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Ximenita ✨</title>
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+<style>
+/* -------------------- ESTILO BASE MINECRAFT -------------------- */
+:root {
+  --mc-green: #5aa35a;
+  --mc-dark-green: #2e7d32;
+  --mc-gui-bg: #C6C6C6;
+  --mc-slot-bg: #8B8B8B;
+  --mc-border-light: #FFF;
+  --mc-border-dark: #555;
+  --mc-font: 'Minecraftia', sans-serif;
+}
+
+body {
+  margin: 0; padding: 0;
+  font-family: var(--mc-font);
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #4da0ff 0%, #8ed98e 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  min-height: 100vh;
+}
+
+/* -------------------- FONDO Y AMBIENTE -------------------- */
+.pixel-bg {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -2; pointer-events: none;
+}
+
+.mc-sun {
+  position: fixed; top: 40px; right: 40px;
+  width: 60px; height: 60px;
+  background: #ffff55;
+  box-shadow: 0 0 30px #ffff55;
+  image-rendering: pixelated;
+  z-index: -1;
+}
+
+.cloud {
+  position: absolute; background: white;
+  border: 4px solid #fff; box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  image-rendering: pixelated; opacity: 0.9;
+}
+
+/* -------------------- COMPONENTES GUI -------------------- */
+.achievement {
+  background: #212121;
+  border: 4px solid #000;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 90%; max-width: 400px;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+  animation: slideIn 0.5s ease-out;
+}
+
+.gui-container {
+  background: var(--mc-gui-bg);
+  border: 4px solid #000;
+  box-shadow: inset -4px -4px var(--mc-border-dark), inset 4px 4px var(--mc-border-light);
+  width: 92%; max-width: 450px;
+  padding: 20px;
+  margin: 20px 0;
+  box-sizing: border-box;
+}
+
+.slot-card {
+  background: var(--mc-slot-bg);
+  border: 3px solid #373737;
+  border-top-color: #000; border-left-color: #000;
+  margin-bottom: 25px;
+  padding: 8px;
+  position: relative;
+}
+
+.date-tag {
+  position: absolute; top: -12px; left: 10px;
+  background: #ffff55; color: #000;
+  border: 2px solid #000;
+  padding: 2px 8px; font-size: 10px; font-weight: bold;
+  text-shadow: none; z-index: 2;
+}
+
+.photo-frame {
+  width: 100%; border: 2px solid #000;
+  display: block; object-fit: cover;
+}
+
+/* -------------------- BOTÓN ENCANTADO -------------------- */
+.enchanted-btn {
+  width: 90%; max-width: 400px;
+  background: #1a7a1a; /* Verde botón MC */
+  color: #fff;
+  border: 4px solid #000;
+  border-top-color: #3fb43f;
+  border-left-color: #3fb43f;
+  padding: 15px;
+  font-family: var(--mc-font);
+  cursor: pointer;
+  margin: 10px 0;
+  text-shadow: 2px 2px 0 #000;
+  transition: all 0.1s;
+}
+
+.enchanted-btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.enchanted-glow {
+  position: relative; overflow: hidden;
+}
+
+.enchanted-glow::after {
+  content: ''; position: absolute; top: -50%; left: -100%;
+  width: 200%; height: 200%;
+  background: linear-gradient(115deg, transparent, rgba(200,100,255,0.4), transparent);
+  animation: enchant-anim 3s infinite linear;
+}
+
+/* -------------------- TEXTO Y CARTELES -------------------- */
+.chat-box {
+  background: rgba(0,0,0,0.7);
+  border: 2px solid var(--mc-border-dark);
+  padding: 15px;
+  color: #FFF;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.hanging-sign {
+  background: #7d5030;
+  border: 4px solid #3d2618;
+  box-shadow: inset 3px 3px 0 #9c6a46;
+  padding: 15px;
+  color: #1a0f06; /* Color de texto madera oscura */
+  text-shadow: none; /* Letreros de madera no tienen sombra blanca */
+  width: 85%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+/* -------------------- ANIMACIONES -------------------- */
+@keyframes enchant-anim { 0% { left: -120%; } 100% { left: 120%; } }
+@keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+
+.particle {
+  position: fixed; pointer-events: none; z-index: 999;
+  animation: floatUp 2.5s ease-out forwards;
+}
+@keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity:1; } 100% { transform: translateY(-200px) scale(0.5); opacity:0; } }
+
+</style>
+</head>
+<body onclick="spawnParticle(event)">
+
+<div class="mc-sun"></div>
+
+<div class="achievement">
+    <div style="font-size: 28px; margin-right: 12px; background: #333; padding: 5px; border: 2px solid #000;">💎</div>
+    <div>
+        <div style="color: #ffff55; font-size: 10px;">¡Desafío completado!</div>
+        <div style="color: #fff; font-size: 11px;">Eres la niña más hermosa ✨</div>
+    </div>
+</div>
+
+<button class="enchanted-btn enchanted-glow" onclick="startExperience(event)">
+    [ REPRODUCIR AUDIO ] 🔊
+</button>
+
+<div class="gui-container">
+    <div style="color: #3f3f3f; margin-bottom: 10px; font-size: 12px;">Cofre de Recuerdos</div>
+    
+    <div class="slot-card">
+        <span class="date-tag">21-03-2026</span>
+        <img src="imagen2.jpg" class="photo-frame" alt="Recuerdo">
+    </div>
+    
+    <div class="slot-card">
+        <span class="date-tag">21-03-2026</span>
+        <img src="imagen3.jpg" class="photo-frame" alt="Recuerdo">
+    </div>
+
+    <div class="slot-card">
+        <span class="date-tag">12-02-2026</span>
+        <img src="IMG_2514.jpeg" class="photo-frame" alt="Recuerdo">
+    </div>
+
+    <div class="chat-box">
+        <span style="color: #55ff55;">&lt;Yo&gt;</span> Hola! 👋 🌻✨, quiero darte el detalle de darte flores amarillas 💐💛, pues habías dicho que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊. Dijiste que no eras mucho de recibir este tipo de regalos 🎁🙅‍♀️ y quise regalarte volver a dar te unas flores por el 21 de marzo🌻 y de paso un peluche 🧸💖. Pues me hace sentir muy bien el saber que te hice sentir feliz ✨🌈 y que te gustó el regalo 🎁💫. El hecho de escribirte es suficiente ✨✍️, no necesito nada a cambio 😇💖. Espero y te guste 🌻🧸✨🙌.
+        <br><br>
+        Te las 💐 doy algo temprano ☀️ porque, pues, es algo obvio ✨ que tu novio te tiene que dar unas igual 🎁 y no quiero incomodar❤️.
+    </div>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <div style="display:flex; gap: 40px;">
+        <div style="width:4px; height:20px; background:#373737; border:1px solid #000;"></div>
+        <div style="width:4px; height:20px; background:#373737; border:1px solid #000;"></div>
+    </div>
+    <div class="hanging-sign">
+        Ya me lo dijiste y me lo dejaste en claro y no soy nadie para hacerte cambiar de opinión pero espero y en serio algún día se dé algo igual tipo Minecraft.
+    </div>
+</div>
+
+<div style="margin: 30px 0; color: #ffff55; font-size: 12px; text-shadow: 2px 2px #000;">
+    💎 Gracias por existir 💎
+</div>
+
+<audio id="audio"><source src="Ximenita.mp3" type="audio/mpeg"></audio>
+
+<script>
+// Crear nubes aleatorias
+for(let i=0; i<5; i++) {
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud';
+    cloud.style.width = (100 + Math.random()*50) + 'px';
+    cloud.style.height = '40px';
+    cloud.style.top = (50 + Math.random()*200) + 'px';
+    cloud.style.left = Math.random()*100 + 'vw';
+    document.body.appendChild(cloud);
+}
+
+function startExperience(e){
+    e.stopPropagation();
+    const audio = document.getElementById('audio');
+    audio.play();
+    
+    // Explosión de partículas al dar click
+    for(let i=0; i<15; i++){
+        setTimeout(() => {
+            spawnParticle({
+                clientX: Math.random() * window.innerWidth,
+                clientY: window.innerHeight * 0.9,
+                forceIcon: Math.random() > 0.5 ? '🌻' : '💎'
+            });
+        }, i * 150);
+    }
+}
+
+function spawnParticle(e){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.innerHTML = e.forceIcon || (Math.random() > 0.5 ? '❤️' : '✨');
+    p.style.left = (e.clientX || Math.random() * window.innerWidth) + 'px';
+    p.style.top = (e.clientY || Math.random() * window.innerHeight) + 'px';
+    p.style.fontSize = (15 + Math.random() * 15) + 'px';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 2500);
+}
+
+// Lluvia constante de pétalos/estrellas
+setInterval(() => {
+    const f = document.createElement('div');
+    f.className = 'particle';
+    f.innerHTML = Math.random() > 0.5 ? '🌸' : '✨';
+    f.style.left = Math.random() * window.innerWidth + 'px';
+    f.style.top = '-20px';
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 4000);
+}, 1000);
+</script>
+
+</body>
+</html>
