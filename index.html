@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Ximenita ✨</title>
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+<style>
+:root {
+  --mc-gray: #C6C6C6;
+  --mc-shadow: 3px 3px 0px #3F3F3F;
+  --mc-border-light: #FFFFFF;
+  --mc-border-dark: #555555;
+}
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'Minecraftia', sans-serif;
+  /* Fondo de tierra clásico de Minecraft al bajar */
+  background: #72A9FF url('https://www.transparenttextures.com/patterns/pixel-weave.png');
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh; color: white; image-rendering: pixelated;
+  overflow-x: hidden; padding-bottom: 100px;
+}
+
+/* SOL PIXELADO */
+.sun {
+  position: fixed; top: 40px; right: 40px;
+  width: 60px; height: 60px;
+  background: #FEFF00; border: 4px solid #F1C40F;
+  box-shadow: 0 0 0 10px rgba(254, 255, 0, 0.2); z-index: 1;
+}
+
+/* NUBES */
+.cloud {
+  position: fixed; background: white; width: 140px; height: 45px;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.1); z-index: 0;
+  animation: moveClouds 40s linear infinite;
+}
+@keyframes moveClouds { from { left: -200px; } to { left: 110vw; } }
+
+/* CABECERA */
+.header-info { text-align: center; margin-top: 40px; z-index: 5; margin-bottom: 20px; }
+.para-ximena { color: #ff55ff; font-size: 28px; text-shadow: var(--mc-shadow); margin-bottom: 5px; }
+.con-carino { color: #ffffff; font-size: 16px; text-shadow: var(--mc-shadow); }
+
+/* BOTÓN ESTILO MINECRAFT */
+.mc-button {
+  width: 320px; background: #A9A9A9; 
+  border: 4px solid #000;
+  border-top-color: var(--mc-border-light); border-left-color: var(--mc-border-light);
+  border-right-color: var(--mc-border-dark); border-bottom-color: var(--mc-border-dark);
+  padding: 12px; color: #E0E0E0; font-size: 16px;
+  margin: 8px 0; cursor: pointer; font-family: 'Minecraftia', sans-serif;
+  text-shadow: 2px 2px #000; position: relative;
+  transition: all 0.1s;
+}
+.mc-button:hover { background: #8B8B8B; color: #ffff55; }
+.mc-button:active {
+  border-top-color: var(--mc-border-dark); border-left-color: var(--mc-border-dark);
+  border-right-color: var(--mc-border-light); border-bottom-color: var(--mc-border-light);
+  transform: translateY(2px);
+}
+
+/* LOGROS */
+.adv-container { display: flex; flex-direction: column; align-items: center; margin: 10px 0; z-index: 5; }
+.achievement {
+  background: rgba(33, 33, 33, 0.95); border: 4px solid #000;
+  display: flex; padding: 12px; width: 300px;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
+  margin-bottom: 12px; align-items: center;
+  border-image: url('https://i.imgur.com/6S6P8hS.png') 10 fill; /* Simulación de borde de UI */
+}
+.adv-text .title { color: #55ff55; font-size: 12px; text-shadow: 2px 2px #000; }
+.adv-text .desc { color: #fff; font-size: 13px; text-shadow: 2px 2px #000; }
+
+/* INVENTARIO */
+.gui-container {
+  background: var(--mc-gray); border: 5px solid #000;
+  box-shadow: inset -5px -5px #555, inset 5px 5px #FFF;
+  width: 350px; padding: 20px; box-sizing: border-box; z-index: 5;
+  margin-top: 20px;
+}
+
+.slot {
+  background: #8B8B8B; border: 4px solid #373737;
+  border-top-color: #000; border-left-color: #000;
+  margin-bottom: 30px; padding: 12px; text-align: center;
+}
+.img-container {
+  width: 100%; height: 260px;
+  overflow: hidden; border: 4px solid #000; background: #222;
+}
+.item-img { width: 100%; height: 100%; object-fit: cover; }
+.item-name { color: #ffeb3b; font-size: 18px; text-shadow: 2px 2px #000; margin: 12px 0; }
+
+/* CHAT */
+.mc-chat-box {
+  background: rgba(0, 0, 0, 0.8);
+  border-left: 6px solid #5555FF;
+  padding: 15px; width: 100%;
+  color: #FFF; font-size: 14px; line-height: 1.6;
+  text-shadow: 2px 2px #000; margin-top: 20px;
+  box-sizing: border-box;
+}
+
+/* MODAL */
+#advancementsModal {
+  display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: #313131 url('https://www.transparenttextures.com/patterns/dark-matter.png'); 
+  border: 5px solid #000; width: 340px; height: 580px;
+  z-index: 3000; box-shadow: 0 0 0 10000px rgba(0,0,0,0.85);
+}
+.adv-header { background: #212121; padding: 15px; text-align: center; color: #f8df14; border-bottom: 5px solid #000; font-size: 18px; }
+.adv-body { padding: 15px; overflow-y: auto; height: 430px; display: flex; flex-direction: column; gap: 12px; }
+.locked { opacity: 0.4; filter: grayscale(1); }
+
+/* PARTÍCULAS */
+.particle {
+  position: fixed; pointer-events: none; z-index: 9999;
+  font-size: 24px; pointer-events: none;
+}
+
+/* HOTBAR */
+.hotbar {
+  position: fixed; bottom: 20px; display: flex;
+  background: url('https://i.imgur.com/83pY64m.png'); /* Hotbar texture */
+  background-size: contain; padding: 4px; gap: 4px; z-index: 100;
+  border: 2px solid #000;
+}
+.hot-slot { width: 40px; height: 40px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+
+/* TOAST FINAL */
+#mc-toast {
+  display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); 
+  background: #212121; border:4px solid #FFF; padding:25px; z-index:4000; 
+  text-align:center; width:300px; box-shadow: 10px 10px 0 #000;
+}
+</style>
+</head>
+<body onclick="spawnExplosion(event)" onscroll="spawnRain()">
+
+<div class="sun"></div>
+<div class="cloud" style="top: 10%; animation-duration: 30s;"></div>
+<div class="cloud" style="top: 25%; animation-duration: 50s;"></div>
+
+<div class="header-info">
+  <div class="para-ximena">Para Ximena</div>
+  <div class="con-carino">Con cariño Daniel</div>
+</div>
+
+<button class="mc-button" onclick="playMusic()">
+  🎵 Música 🔊
+</button>
+
+<div class="adv-container">
+  <div class="achievement">
+    <div style="font-size: 32px; margin-right: 15px;">💎</div>
+    <div class="adv-text">
+      <div class="title">¡Logro realizado!</div>
+      <div class="desc">Eres la niña más hermosa ✨</div>
+    </div>
+  </div>
+  
+  <button class="mc-button" onclick="showAdvancements()">
+    [ LOGROS ] 📜
+  </button>
+</div>
+
+<div class="gui-container">
+  <div class="slot">
+    <span style="background: #ffff55; color: #000; padding: 2px 6px; font-size: 10px; border: 2px solid #000; display: inline-block; margin-bottom: 5px;">21-03-2026</span>
+    <div class="img-container"><img src="imagen2.jpg" class="item-img"></div>
+    <div class="item-name">Snoopy 🐻✨</div>
+  </div>
+  
+  <div class="slot">
+    <span style="background: #ffff55; color: #000; padding: 2px 6px; font-size: 10px; border: 2px solid #000; display: inline-block; margin-bottom: 5px;">21-03-2026</span>
+    <div class="img-container"><img src="imagen3.jpg" class="item-img"></div>
+    <div class="item-name">Detalle Especial 💖🎁</div>
+  </div>
+
+  <div class="slot">
+    <span style="background: #ffff55; color: #000; padding: 2px 6px; font-size: 10px; border: 2px solid #000; display: inline-block; margin-bottom: 5px;">12-02-2026</span>
+    <div class="img-container"><img src="IMG_2655.jpeg" class="item-img"></div>
+    <div class="item-name">Para ti 💐❤️</div>
+  </div>
+
+  <div class="mc-chat-box">
+    ¡Hola! 👋 🌻✨ Quiero darte el detalle de las flores amarillas 💐💛, pues dijiste que te hizo sentir especial 🥰 y que te gustó el ramo 💐😊. Dijiste que no eres mucho de recibir este tipo de regalos 🎁🙅‍♀️, así que quise sorprenderte de nuevo el 21 de marzo 🌻 y de paso con un peluche 🧸💖. Me hace sentir muy feliz saber que te hice sonreír ✨🌈 y que te gustó 🎁💫. Escribirte es suficiente ✨✍️, no necesito nada a cambio 😇💖. Espero que te guste 🌻🧸✨🙌.  
+    <br><br>
+    Te las doy algo temprano, pues es obvio que tu novio también te tiene que dar una y no quiero molestar. ❤️
+  </div>
+</div>
+
+<button class="mc-button" style="background: #3fb33f; margin-top: 20px;" onclick="showFinalMessage()">💖 ¡PRESÍNAME! 💖</button>
+
+<div id="advancementsModal">
+  <div class="adv-header">Logros de Nosotros</div>
+  <div class="adv-body">
+    <div class="achievement"><div style="font-size: 20px; margin-right: 10px;">🧸</div><div class="adv-text"><div class="title">Compañero de Sueños</div><div class="desc">Dar el peluche de Snoopy perfecto.</div></div></div>
+    <div class="achievement"><div style="font-size: 20px; margin-right: 10px;">🌻</div><div class="adv-text"><div class="title">Jardín Amarillo</div><div class="desc">Detalle de flores amarillas.</div></div></div>
+    <div class="achievement"><div style="font-size: 20px; margin-right: 10px;">💘</div><div class="adv-text"><div class="title">Viajero del Tiempo</div><div class="desc">14 de febrero adelantado.</div></div></div>
+    <div class="achievement locked"><div style="font-size: 20px; margin-right: 10px;">🍰</div><div class="adv-text"><div class="title">Dulce Momento</div><div class="desc">Comer un postre juntos.</div></div></div>
+    <div class="achievement locked"><div style="font-size: 20px; margin-right: 10px;">🌅</div><div class="adv-text"><div class="title">Horizonte Cuadrado</div><div class="desc">Ver un atardecer tipo Minecraft.</div></div></div>
+    <div class="achievement locked"><div style="font-size: 20px; margin-right: 10px;">🌍</div><div class="adv-text"><div class="title">Nuestro Refugio</div><div class="desc">Tener un mundo propio.</div></div></div>
+    <div class="achievement locked"><div style="font-size: 20px; margin-right: 10px;">⚔️</div><div class="adv-text"><div class="title">Survival Duo</div><div class="desc">Pasarnos el juego juntos algún día.</div></div></div>
+    <div class="achievement" style="border-color: #ff55ff;"><div style="font-size: 20px; margin-right: 10px;">📜</div><div class="adv-text"><div class="title" style="color: #ff55ff;">Un último pensamiento...</div><div class="desc">Obviamente no pondré todos mis deseos contigo porque te cansarías de leer. 💖</div></div></div>
+  </div>
+  <div style="text-align: center; padding: 10px;">
+    <button class="mc-button" style="width: 150px; padding: 10px; font-size: 12px; margin: 0 auto;" onclick="hideAdvancements()">CERRAR</button>
+  </div>
+</div>
+
+<div id="mc-toast">
+  <div style="color:#ffff55; text-shadow: 2px 2px #000; margin-bottom: 15px; font-size: 14px;">💎 No necesito buscar diamantes, porque el tesoro más valioso de Daniel eres tú 💖✨</div>
+  <button class="mc-button" style="width:100px; padding:5px; font-size: 12px;" onclick="document.getElementById('mc-toast').style.display='none'">OK</button>
+</div>
+
+<div class="hotbar">
+  <div class="hot-slot">🌻</div><div class="hot-slot">💎</div><div class="hot-slot">💖</div><div class="hot-slot">🧸</div><div class="hot-slot">🌾</div>
+</div>
+
+<audio id="audio"><source src="Ximenita.mp3" type="audio/mpeg"></audio>
+
+<script>
+function playMusic() { document.getElementById('audio').play(); }
+function showAdvancements() { document.getElementById('advancementsModal').style.display = 'block'; }
+function hideAdvancements() { document.getElementById('advancementsModal').style.display = 'none'; }
+function showFinalMessage() { document.getElementById('mc-toast').style.display = 'block'; }
+
+function spawnRain() {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const items = ['🌻', '💎', '🌼', '✨'];
+  p.innerHTML = items[Math.floor(Math.random() * items.length)];
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.top = '-50px';
+  p.style.transition = 'all 2s linear';
+  document.body.appendChild(p);
+  
+  setTimeout(() => {
+    p.style.transform = `translate(${(Math.random()-0.5)*100}px, ${window.innerHeight + 100}px) rotate(${Math.random()*360}deg)`;
+    p.style.opacity = '0';
+  }, 10);
+  
+  setTimeout(() => p.remove(), 2000);
+}
+
+function spawnExplosion(e) {
+  for(let i=0; i<8; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.innerHTML = ['🌻', '💎', '💖'][Math.floor(Math.random()*3)];
+    p.style.left = e.clientX + 'px';
+    p.style.top = e.clientY + 'px';
+    p.style.position = 'fixed';
+    
+    const destX = (Math.random() - 0.5) * 250;
+    const destY = (Math.random() - 0.5) * 250;
+    
+    p.animate([
+      { transform: 'translate(0,0) scale(1)', opacity: 1 },
+      { transform: `translate(${destX}px, ${destY}px) scale(0)`, opacity: 0 }
+    ], { duration: 1000, easing: 'ease-out' });
+    
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1000);
+  }
+}
+
+// Lluvia automática constante de flores amarillas
+setInterval(spawnRain, 400);
+</script>
+</body>
+</html>
