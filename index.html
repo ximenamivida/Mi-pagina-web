@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Ximenita ✨</title>
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+<style>
+:root {
+  --mc-gray: #C6C6C6;
+  --mc-shadow: 2px 2px 0px #3F3F3F;
+}
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'Minecraftia', sans-serif;
+  background-color: #0b0b15;
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh; color: white; image-rendering: pixelated;
+  overflow-x: hidden; padding-bottom: 50px;
+}
+
+/* LUNA CUADRADA */
+.moon {
+  position: fixed; top: 20px; right: 20px;
+  display: grid; grid-template-columns: repeat(8, 6px); grid-template-rows: repeat(8, 6px);
+  width: 48px; height: 48px; border: 2px solid #000; z-index: 10;
+}
+.moon div { width: 6px; height: 6px; }
+.w { background: #FFFFFF; } .g { background: #D8D8D8; } .s { background: #A0A0A0; } 
+
+.header-info { text-align: center; margin-top: 20px; z-index: 5; }
+.para-ximena { color: #ff55ff; font-size: 22px; text-shadow: var(--mc-shadow); margin-bottom: 5px; }
+.con-carino { color: #55ffff; font-size: 16px; text-shadow: var(--mc-shadow); }
+
+/* LOGRO PRINCIPAL */
+.adv-container { display: flex; flex-direction: column; align-items: center; margin: 20px 0; z-index: 5; }
+.achievement {
+  background: #212121; border: 3px solid #000;
+  display: flex; padding: 10px; width: 310px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.5); margin-bottom: 10px;
+}
+.adv-text .title { color: #55ff55; font-size: 11px; text-shadow: 2px 2px #000; }
+.adv-text .desc { color: #fff; font-size: 12px; text-shadow: 2px 2px #000; }
+
+/* INVENTARIO DE ÍTEMS CORREGIDO */
+.gui-container {
+  background: var(--mc-gray); border: 3px solid #000;
+  box-shadow: inset -3px -3px #555, inset 3px 3px #FFF;
+  width: 330px; padding: 15px; box-sizing: border-box; z-index: 5;
+}
+.inventory-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  background: #8B8B8B; padding: 10px; border: 3px solid #373737;
+  margin-top: 10px; margin-bottom: 15px;
+}
+.item-slot {
+  width: 80px; height: 80px; background: #8B8B8B;
+  border: 3px solid #373737; border-top-color: #000; border-left-color: #000;
+  display: flex; align-items: center; justify-content: center;
+}
+.item-slot img { width: 60px; height: 60px; image-rendering: pixelated; }
+
+/* CHAT */
+.mc-chat {
+  background: rgba(0,0,0,0.85); padding: 15px; border: 2px solid #555;
+  color: #FFF; font-size: 13px; line-height: 1.6;
+  text-shadow: 2px 2px #000; text-align: left;
+}
+
+/* BOTONES */
+.mc-button {
+  width: 330px; background: #8B8B8B; border: 3px solid #000;
+  border-top-color: #FFF; border-left-color: #FFF;
+  padding: 15px; color: white; font-family: 'Minecraftia', sans-serif;
+  text-shadow: 2px 2px #000; cursor: pointer; margin: 10px 0;
+}
+.btn-final { background: #3fb33f; font-size: 18px; }
+
+/* MODAL LOGROS */
+#advancementsModal {
+  display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: #313131; border: 4px solid #000; width: 340px; height: 500px;
+  z-index: 3000; box-shadow: 0 0 0 5000px rgba(0,0,0,0.8);
+}
+.adv-body { padding: 15px; overflow-y: auto; height: 380px; display: flex; flex-direction: column; gap: 10px; }
+
+/* TOAST FINAL CORREGIDO */
+#mc-toast {
+  display: none; position: fixed; bottom: 20%; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.95); border: 3px solid #ff55ff; padding: 20px;
+  width: 280px; text-align: center; z-index: 4000; color: #ffff55;
+  box-shadow: 5px 5px 0px #000;
+}
+
+.particle { position: fixed; pointer-events: none; animation: fly 2s forwards; z-index: 9999; }
+@keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-200px); opacity: 0; } }
+</style>
+</head>
+<body>
+
+<div class="moon">
+  <div class="g"></div><div class="w"></div><div class="w"></div><div class="w"></div><div class="w"></div><div class="w"></div><div class="g"></div><div class="g"></div>
+  <div class="w"></div><div class="s"></div><div class="s"></div><div class="w"></div><div class="w"></div><div class="s"></div><div class="s"></div><div class="w"></div>
+  <div class="w"></div><div class="s"></div><div class="s"></div><div class="w"></div><div class="w"></div><div class="s"></div><div class="s"></div><div class="w"></div>
+  <div class="w"></div><div class="w"></div><div class="w"></div><div class="s"></div><div class="s"></div><div class="w"></div><div class="w"></div><div class="w"></div>
+  <div class="w"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="w"></div><div class="s"></div><div class="w"></div>
+  <div class="g"></div><div class="s"></div><div class="s"></div><div class="w"></div><div class="w"></div><div class="w"></div><div class="s"></div><div class="g"></div>
+  <div class="g"></div><div class="w"></div><div class="w"></div><div class="w"></div><div class="s"></div><div class="s"></div><div class="w"></div><div class="g"></div>
+  <div class="g"></div><div class="g"></div><div class="g"></div><div class="w"></div><div class="w"></div><div class="g"></div><div class="g"></div><div class="g"></div>
+</div>
+
+<div class="header-info">
+  <div class="para-ximena">Para Ximena</div>
+  <div class="con-carino">Con cariño Daniel</div>
+</div>
+
+<div class="adv-container">
+  <div class="achievement">
+    <div style="font-size: 24px; margin-right: 12px;">💎</div>
+    <div class="adv-text">
+      <div class="title">¡Logro realizado!</div>
+      <div class="desc">Eres la niña más hermosa ✨</div>
+    </div>
+  </div>
+  <button class="mc-button" style="width: 310px; margin: 0; padding: 10px;" onclick="showAdvancements()">
+    [ VER LOGROS ] 📜
+  </button>
+</div>
+
+<button class="mc-button" onclick="playMusic()">
+  🎵 Ya borracho (herencia de grandes) 🔊
+</button>
+
+<div class="gui-container">
+  <div class="mc-chat">
+    ¡Hola! 👋 🌻 Quiero darte el detalle de las flores amarillas 💐, pues dijiste que te hizo sentir especial 🥰. Dijiste que no eres de recibir estos regalos 🎁, así que quise sorprenderte el 21 de marzo 🌻 con un peluche 🧸. Me hace feliz saber que te hice sonreír ✨. No necesito nada a cambio 😇.
+    <br><br>
+    <span style="color: #ff5555;">[Aviso]</span> Te las doy temprano ☀️ porque tu novio también te las dará y no quiero incomodar ❤️.
+  </div>
+
+  <div id="item-grid" class="inventory-grid">
+    </div>
+</div>
+
+<div id="advancementsModal">
+  <div class="adv-body" id="adv-list">
+    </div>
+  <div style="text-align: center; padding: 10px;">
+    <button class="mc-button" style="width: 120px; padding: 8px;" onclick="hideAdvancements()">CERRAR</button>
+  </div>
+</div>
+
+<button class="mc-button btn-final" onclick="showFinalMessage()">💖 ¡EL TESORO FINAL! 💖</button>
+
+<div id="mc-toast">
+  💎 No necesito buscar diamantes, porque el tesoro más valioso de Daniel eres tú 💖✨
+  <br><br>
+  <button class="mc-button" style="width: 100px; padding: 5px;" onclick="closeToast()">OK</button>
+</div>
+
+<audio id="audio"><source src="Ximenita.mp3" type="audio/mpeg"></audio>
+
+<script>
+// ÍTEMS ACTUALIZADOS (Sin bloqueos)
+const items = [
+  { n: "Snoopy 🐻", img: "https://minecraft.wiki/images/Snoopy_JE1_BE1.png" }, // Si no tienes imagen local, usa una de peluche
+  { n: "Amapola 🌻", img: "https://minecraft.wiki/images/Poppy_JE3_BE2.png" },
+  { n: "Diente de León 🌼", img: "https://minecraft.wiki/images/Dandelion_JE3_BE2.png" }
+];
+
+const grid = document.getElementById('item-grid');
+items.forEach(item => {
+  grid.innerHTML += `<div class="item-slot" title="${item.n}"><img src="${item.img}"></div>`;
+});
+
+function playMusic() { document.getElementById('audio').play(); spawnParticles(); }
+function showAdvancements() { 
+  document.getElementById('advancementsModal').style.display = 'block';
+  spawnParticles();
+}
+function hideAdvancements() { document.getElementById('advancementsModal').style.display = 'none'; }
+function showFinalMessage() { 
+  document.getElementById('mc-toast').style.display = 'block'; 
+  spawnParticles(); 
+}
+function closeToast() { document.getElementById('mc-toast').style.display = 'none'; }
+
+function spawnParticles() {
+  const types = ['💖', '🌻', '🌼'];
+  for(let i=0; i<15; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.innerHTML = types[Math.floor(Math.random() * types.length)];
+    p.style.left = Math.random() * 90 + 'vw';
+    p.style.top = (window.innerHeight - 50) + 'px';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 2000);
+  }
+}
+</script>
+
+</body>
+</html>
