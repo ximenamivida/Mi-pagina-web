@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Ximenita 🌻</title>
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+<style>
+:root { --mc-gray: #C6C6C6; --mc-shadow: 3px 3px 0px #3F3F3F; }
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'Minecraftia', sans-serif;
+  background-color: #72A9FF;
+  background-image: linear-gradient(to bottom, #72A9FF 0%, #90BFFF 100%);
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh; color: white; image-rendering: pixelated;
+  overflow-x: hidden; padding-bottom: 80px; /* Más espacio al final */
+}
+
+/* SOL */
+.sun {
+  position: fixed; top: 30px; left: 30px;
+  width: 60px; height: 60px;
+  background: #FEFF00; border: 4px solid #F1C40F;
+  box-shadow: 0 0 30px #FEFF00; z-index: 1;
+}
+
+/* CABECERA CON MÁS ESPACIO */
+.header-info { text-align: center; margin-top: 60px; margin-bottom: 40px; z-index: 5; }
+.para-ximena { color: #ff55ff; font-size: 28px; text-shadow: var(--mc-shadow); margin-bottom: 15px; }
+.con-carino { color: #ffffff; font-size: 18px; text-shadow: var(--mc-shadow); letter-spacing: 1px; }
+
+/* BOTONES MEJORADOS */
+.mc-button {
+  width: 340px; background: #8B8B8B; border: 4px solid #000;
+  border-top-color: #FFF; border-left-color: #FFF;
+  border-right-color: #555; border-bottom-color: #555;
+  padding: 20px; color: white; font-size: 15px;
+  margin: 20px 0; cursor: pointer; font-family: 'Minecraftia', sans-serif;
+  text-shadow: 2px 2px #000; transition: transform 0.1s;
+}
+.mc-button:active { transform: scale(0.98); border-top-color: #555; border-left-color: #555; border-right-color: #FFF; border-bottom-color: #FFF; }
+
+/* LOGROS */
+.achievement {
+  background: #212121; border: 4px solid #000;
+  display: flex; padding: 15px; width: 320px;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+  margin-bottom: 20px; align-items: center;
+}
+.adv-icon { width: 32px; height: 32px; margin-right: 18px; image-rendering: pixelated; }
+.adv-text .title { color: #55ff55; font-size: 12px; text-shadow: 2px 2px #000; margin-bottom: 4px; }
+.adv-text .desc { color: #fff; font-size: 11px; text-shadow: 2px 2px #000; line-height: 1.4; }
+.locked { opacity: 0.5; filter: grayscale(1); }
+
+/* CONTENEDOR DE IMÁGENES CON ESPACIO */
+.gui-container {
+  background: var(--mc-gray); border: 4px solid #000;
+  box-shadow: inset -5px -5px #555, inset 5px 5px #FFF;
+  width: 360px; padding: 25px; box-sizing: border-box; z-index: 5;
+  margin: 30px 0;
+}
+
+.slot {
+  background: #8B8B8B; border: 4px solid #373737;
+  border-top-color: #000; border-left-color: #000;
+  margin-bottom: 40px; padding: 15px; text-align: center;
+}
+.img-container {
+  width: 100%; height: 280px;
+  overflow: hidden; border: 4px solid #000; background: #333;
+}
+.item-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.item-name { color: #ffeb3b; font-size: 20px; text-shadow: 2px 2px #000; margin-top: 15px; }
+
+/* CHAT */
+.mc-chat-box {
+  background: rgba(0, 0, 0, 0.8); border-left: 6px solid #5555FF;
+  padding: 20px; width: 100%; color: #FFF; font-size: 14px; line-height: 1.8;
+  text-shadow: 2px 2px #000; margin-top: 25px; box-sizing: border-box;
+}
+.chat-icon { width: 22px; height: 22px; vertical-align: middle; image-rendering: pixelated; margin: 0 4px; }
+
+/* VENTANA LOGROS */
+#advancementsModal {
+  display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: #313131; border: 5px solid #000; width: 350px; height: 580px;
+  z-index: 3000; box-shadow: 0 0 0 5000px rgba(0,0,0,0.8);
+}
+.adv-body { padding: 20px; overflow-y: auto; height: 440px; display: flex; flex-direction: column; gap: 15px; }
+
+/* TOAST FINAL */
+#mc-toast {
+  display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:rgba(0,0,0,0.95); border:4px solid #fff; padding:30px; z-index:4000;
+  text-align:center; width:310px; box-shadow: 10px 10px 0px #000;
+}
+</style>
+</head>
+<body>
+
+<div class="sun"></div>
+
+<div class="header-info">
+  <div class="para-ximena">Para Ximena</div>
+  <div class="con-carino">Con cariño Daniel</div>
+</div>
+
+<button class="mc-button" onclick="playMusic()">MÚSICA: YA BORRACHO 🔊</button>
+
+<div class="adv-container">
+  <div class="achievement">
+    <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" class="adv-icon">
+    <div class="adv-text">
+      <div class="title">¡Logro realizado!</div>
+      <div class="desc">Eres la niña más hermosa</div>
+    </div>
+  </div>
+  <button class="mc-button" style="width: 320px; margin-top: 10px; padding: 15px;" onclick="showAdvancements()">LISTA DE LOGROS 📜</button>
+</div>
+
+<div class="gui-container">
+  <div class="slot">
+    <span style="background: #ffff55; color: #000; padding: 4px 10px; font-size: 11px; border: 2px solid #000; display: inline-block; margin-bottom: 12px;">21-03-2026</span>
+    <div class="img-container"><img src="imagen2.jpg" class="item-img"></div>
+    <div class="item-name">Snoopy 🧸</div>
+  </div>
+  
+  <div class="slot">
+    <span style="background: #ffff55; color: #000; padding: 4px 10px; font-size: 11px; border: 2px solid #000; display: inline-block; margin-bottom: 12px;">21-03-2026</span>
+    <div class="img-container"><img src="imagen3.jpg" class="item-img"></div>
+    <div class="item-name">Detalle Especial ✨</div>
+  </div>
+
+  <div class="slot" style="margin-bottom: 10px;">
+    <span style="background: #ffff55; color: #000; padding: 4px 10px; font-size: 11px; border: 2px solid #000; display: inline-block; margin-bottom: 12px;">12-02-2026</span>
+    <div class="img-container"><img src="IMG_2655.jpeg" class="item-img"></div>
+    <div class="item-name">Para ti 💐</div>
+  </div>
+
+  <div class="mc-chat-box">
+    ¡Hola! Quiero darte el detalle de las flores amarillas <img src="https://minecraft.wiki/images/Dandelion_JE3_BE2.png" class="chat-icon">, pues dijiste que te hizo sentir especial y que te gustó el ramo <img src="https://minecraft.wiki/images/Sunflower_JE2_BE2.png" class="chat-icon">. 
+    <br><br>
+    Dijiste que no eres mucho de recibir estos regalos, así que quise sorprenderte de nuevo el 21 de marzo con un peluche <img src="https://minecraft.wiki/images/Totem_of_Undying_JE2_BE2.png" class="chat-icon">. Me hace sentir feliz saber que te hice sonreír.
+    <br><br>
+    Te las doy algo temprano, pues es obvio que tu novio también te tiene que dar una y no quiero molestar <img src="https://minecraft.wiki/images/Rose_Bush_JE2_BE2.png" class="chat-icon">.
+  </div>
+</div>
+
+<div id="advancementsModal">
+  <div class="adv-header" style="text-align:center; padding:20px; color:#f8df14; font-size: 18px;">Logros de Nosotros</div>
+  <div class="adv-body">
+    <div class="achievement"><img src="https://minecraft.wiki/images/Totem_of_Undying_JE2_BE2.png" class="adv-icon"><div class="adv-text"><div class="title">Compañero de Sueños</div><div class="desc">Dar el peluche de Snoopy perfecto.</div></div></div>
+    <div class="achievement"><img src="https://minecraft.wiki/images/Dandelion_JE3_BE2.png" class="adv-icon"><div class="adv-text"><div class="title">Jardín Amarillo</div><div class="desc">Detalle de flores amarillas.</div></div></div>
+    <div class="achievement"><img src="https://minecraft.wiki/images/Clock_JE3_BE3.gif" class="adv-icon"><div class="adv-text"><div class="title">Viajero del Tiempo</div><div class="desc">14 de febrero adelantado.</div></div></div>
+    
+    <div class="achievement locked"><img src="https://minecraft.wiki/images/Cake_JE4.png" class="adv-icon"><div class="adv-text"><div class="title">Dulce Momento</div><div class="desc">Comer un postre juntos.</div></div></div>
+    <div class="achievement locked"><img src="https://minecraft.wiki/images/Sunflower_JE2_BE2.png" class="adv-icon"><div class="adv-text"><div class="title">Horizonte Cuadrado</div><div class="desc">Ver un atardecer juntos.</div></div></div>
+    <div class="achievement" style="border-color: #ff55ff;"><img src="https://minecraft.wiki/images/Book_and_Quill_JE2_BE2.png" class="adv-icon"><div class="adv-text"><div class="title" style="color:#ff55ff;">Un último pensamiento</div><div class="desc">Algún día...</div></div></div>
+  </div>
+  <button class="mc-button" style="width:160px; margin:20px auto; display:block;" onclick="hideAdvancements()">CERRAR</button>
+</div>
+
+<button class="mc-button" style="background: #3fb33f; height: auto; margin-top: 30px;" onclick="showFinalMessage()">
+  <span style="font-size: 18px;">¡PRESÍNAME!</span><br>
+  <span style="font-size: 11px; opacity: 0.8;">Déjame caer en tus brazos...</span>
+</button>
+
+<div id="mc-toast">
+  <div style="color:#ffff55; text-shadow: 2px 2px #000; margin-bottom: 15px; font-size: 16px; line-height: 1.4;">
+    Eres mi único tesoro y lo único que necesito 💖
+  </div>
+  <div style="color:#ffffff; font-size: 11px; margin-bottom: 15px; line-height: 1.5;">
+    💎 No necesito buscar diamantes, porque el tesoro más valioso de Daniel eres tú ✨
+  </div>
+  <div style="color:#aaaaaa; font-size: 10px; font-style: italic;">Déjame caer en tus brazos...</div>
+  <button class="mc-button" style="width:120px; padding:10px; margin-top: 20px;" onclick="document.getElementById('mc-toast').style.display='none'">OK</button>
+</div>
+
+<audio id="audio"><source src="Ximenita.mp3" type="audio/mpeg"></audio>
+
+<script>
+function playMusic() { document.getElementById('audio').play(); }
+function showAdvancements() { document.getElementById('advancementsModal').style.display = 'block'; }
+function hideAdvancements() { document.getElementById('advancementsModal').style.display = 'none'; }
+function showFinalMessage() { document.getElementById('mc-toast').style.display = 'block'; }
+</script>
+</body>
+</html>
