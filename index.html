@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Ximenita 🌻</title>
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+<style>
+:root { --mc-gray: #C6C6C6; --mc-shadow: 2px 2px 0px #3F3F3F; }
+body {
+  margin: 0; padding: 0; font-family: 'Minecraftia', sans-serif;
+  background: linear-gradient(180deg, #1a2a44 0%, #4e345e 30%, #e36a4f 60%, #f7b05b 100%);
+  background-attachment: fixed; display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh; color: white; image-rendering: pixelated; overflow-x: hidden; padding-bottom: 50px;
+}
+
+/* Decoración y Partículas */
+.flower-pixel { position: fixed; font-size: 20px; pointer-events: none; z-index: 1; animation: floatFlower 7s linear infinite; opacity: 0; }
+@keyframes floatFlower { 0% { transform: translateY(110vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+
+.particle { position: absolute; pointer-events: none; z-index: 1000; font-size: 22px; animation: particleAnim 0.8s ease-out forwards; }
+@keyframes particleAnim { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; } }
+
+.header-info { text-align: center; margin: 25px 0 15px; z-index: 2; }
+.para-ximena { color: #ff55ff; font-size: 22px; text-shadow: var(--mc-shadow); }
+
+/* Estilo de Botón Minecraft */
+.mc-button { 
+  width: 90%; max-width: 310px; background: #8B8B8B; border: 3px solid #000; 
+  border-top-color: #FFF; border-left-color: #FFF; padding: 12px; color: white; 
+  font-size: 12px; margin: 8px 0; cursor: pointer; font-family: 'Minecraftia', sans-serif; 
+  text-shadow: 2px 2px #000; position: relative;
+}
+.mc-button:active { border-top-color: #000; border-left-color: #000; border-bottom-color: #FFF; border-right-color: #FFF; }
+
+/* Logro Principal */
+.achievement { background: #212121; border: 3px solid #000; display: flex; padding: 10px; width: 88%; max-width: 290px; margin: 12px 0; align-items: center; z-index: 2; }
+.adv-icon { width: 32px; height: 32px; margin-right: 12px; image-rendering: pixelated; }
+.adv-text .title { color: #55ff55; font-size: 11px; text-shadow: 1px 1px #000; }
+.adv-text .desc { color: #fff; font-size: 10px; }
+
+/* GUI Contenedor */
+.gui-container { background: var(--mc-gray); border: 4px solid #000; box-shadow: inset -4px -4px #555, inset 4px 4px #FFF; width: 94%; max-width: 340px; padding: 15px; box-sizing: border-box; margin: 15px 0; z-index: 2; }
+.slot { background: #8B8B8B; border: 3px solid #000; border-top-color: #373737; border-left-color: #373737; margin-bottom: 25px; padding: 10px; text-align: center; }
+.mc-coords { background: rgba(0,0,0,0.6); border-left: 3px solid #ffff55; color: #fff; font-size: 10px; text-align: left; padding: 6px; margin-bottom: 10px; }
+.coord-val { color: #ffff55; }
+.img-container { width: 100%; height: 250px; background: #1a1a1a; border: 3px solid #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.item-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.item-name { color: #ffeb3b; font-size: 15px; text-shadow: 2px 2px #000; margin-top: 12px; display: block; }
+
+/* CAJA DE CHAT CON TEXTO COMPLETO */
+.mc-chat-box { 
+  background: rgba(0, 0, 0, 0.85); border-left: 4px solid #5555FF; padding: 15px; 
+  color: #FFF; font-size: 11px; line-height: 1.6; text-shadow: 1px 1px #000; text-align: left; 
+}
+
+/* BOTÓN FINAL MINECRAFT VERDE */
+.mc-btn-final { 
+  background: #55AA33 !important; border: 4px solid #000 !important; 
+  border-top-color: #77DD55 !important; border-left-color: #77DD55 !important; 
+  box-shadow: inset -4px -4px 0px #336622; margin-top: 20px !important;
+  color: white !important; width: 94%; max-width: 340px;
+}
+.mc-btn-final:active { border-top-color: #336622 !important; border-left-color: #336622 !important; }
+
+#advancementsModal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #313131; border: 4px solid #000; width: 310px; max-height: 85vh; z-index: 3000; box-shadow: 0 0 0 5000px rgba(0,0,0,0.8); overflow-y: auto; padding: 15px; }
+
+/* Candados */
+.locked { opacity: 0.4; filter: grayscale(1); }
+.native-lock { position: absolute; right: 15px; width: 16px; height: 18px; }
+.lock-body { width: 100%; height: 10px; background: #FFF; position: absolute; bottom: 0; box-shadow: 2px 2px 0 #AAA; }
+.lock-shackle { width: 10px; height: 8px; border: 3px solid #FFF; border-bottom: none; position: absolute; top: 0; left: 3px; }
+</style>
+</head>
+<body onmousedown="spawnEffects(event)">
+
+<script>
+  for(let i=0; i<15; i++) {
+    let f = document.createElement('div'); f.className = 'flower-pixel'; 
+    f.innerHTML = Math.random() > 0.5 ? '🌻' : '🌼';
+    f.style.left = Math.random() * 95 + 'vw'; f.style.animationDelay = Math.random() * 7 + 's';
+    document.body.appendChild(f);
+  }
+</script>
+
+<div class="header-info">
+  <div class="para-ximena">Para Ximena 🌻</div>
+  <div class="con-carino">Con cariño Daniel</div>
+</div>
+
+<button class="mc-button" onclick="document.getElementById('audio').play()">
+  MÚSICA: YA BORRACHO 🎤
+</button>
+
+<div class="achievement">
+  <img src="https://minecraft.wiki/images/thumb/Diamond_JE3_BE3.png/32px-Diamond_JE3_BE3.png" class="adv-icon">
+  <div class="adv-text">
+    <div class="title">¡Logro realizado!</div>
+    <div class="desc">Eres la niña más hermosa 🌻</div>
+  </div>
+</div>
+
+<button class="mc-button" onclick="document.getElementById('advancementsModal').style.display='block'">
+  LISTA DE LOGROS 📜
+</button>
+
+<div class="gui-container">
+  <div class="slot">
+    <div class="mc-coords">XYZ: <span class="coord-val">21 / 03 / 2026</span></div>
+    <div class="img-container"><img src="TU_FOTO_SNOOPY.jpg" class="item-img" onerror="this.parentElement.innerHTML='🧸'"></div>
+    <span class="item-name">Snoopy 🧸</span>
+  </div>
+  
+  <div class="slot">
+    <div class="mc-coords">XYZ: <span class="coord-val">21 / 03 / 2026</span></div>
+    <div class="img-container"><img src="TU_OTRA_FOTO.jpg" class="item-img" onerror="this.parentElement.innerHTML='✨'"></div>
+    <span class="item-name">Detalle Especial ✨</span>
+  </div>
+
+  <div class="slot">
+    <div class="mc-coords">XYZ: <span class="coord-val">12 / 02 / 2026</span></div>
+    <div class="img-container"><img src="IMG_2655.jpeg" class="item-img"></div>
+    <span class="item-name">Para ti 💐</span>
+  </div>
+
+  <div class="mc-chat-box">
+    Hola, quería darte el detalle de flores amarillas y un peluche 🧸 ya 21 de marzo, pues habías dicho que te gustó el otro ramo 💐 y que te había hecho sentir especial. La verdad, me siento bien con que te guste, pues habías dicho que no recibías mucho este tipo de regalos. Con poder dártelo es suficiente para mí, espero que te guste.
+    <br><br>
+    Te las doy sin intención de nada, solo me sentí bien cuando dijiste que te había hecho sentir especial. Te las intento dar algo tarde porque si tu novio te da unas, no quiero coincidir con la hora y causar un problema. 🌻
+  </div>
+</div>
+
+<div id="advancementsModal">
+  <h3 style="color:#f8df14; text-align:center; font-size:12px;">Logros de Nosotros</h3>
+  <div class="achievement"><div class="adv-icon">🧸</div><div class="adv-text"><div class="title">Compañero de Sueños</div><div class="desc">El peluche perfecto.</div></div></div>
+  <div class="achievement"><div class="adv-icon">🌻</div><div class="adv-text"><div class="title">Jardín Amarillo</div><div class="desc">Detalle de flores amarillas.</div></div></div>
+  <div class="achievement"><img src="https://minecraft.wiki/images/thumb/Clock_JE3_BE3.gif/32px-Clock_JE3_BE3.gif" class="adv-icon"><div class="adv-text"><div class="title">Viajero del Tiempo</div><div class="desc">14 de febrero adelantado.</div></div></div>
+  <div class="achievement locked"><img src="https://minecraft.wiki/images/thumb/Cake_JE4.png/32px-Cake_JE4.png" class="adv-icon"><div class="adv-text"><div class="title">Dulce Momento</div><div class="desc">Postre juntos.</div></div><div class="native-lock"><div class="lock-shackle"></div><div class="lock-body"></div></div></div>
+  <div class="achievement locked"><div class="adv-icon">🌅</div><div class="adv-text"><div class="title">Nuestro Mundo</div><div class="desc">Un lugar solo para nosotros.</div></div><div class="native-lock"><div class="lock-shackle"></div><div class="lock-body"></div></div></div>
+  <div class="achievement" style="border-color:#ff55ff;"><div class="adv-icon">📖</div><div class="adv-text"><div class="title" style="color:#ff55ff;">Mucho más por decir</div><div class="desc">Mucho más pero claro que no pondré todo sería mucho o algo así...🌻</div></div></div>
+  <button class="mc-button" style="width:100%;" onclick="document.getElementById('advancementsModal').style.display='none'">CERRAR</button>
+</div>
+
+<button class="mc-button mc-btn-final" onclick="alert('💎 Mi tesoro eres tú ✨')">
+  No nesesito buscar diamantes mi único tesoro eres tu 💎✨🌻
+</button>
+
+<audio id="audio"><source src="Ximenita.mp3" type="audio/mpeg"></audio>
+
+<script>
+function spawnEffects(e) {
+  const particles = ['❤️', '✨', '🌻', '💎', '⭐'];
+  for(let i=0; i<8; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.innerHTML = particles[Math.floor(Math.random() * particles.length)];
+    p.style.left = e.clientX + 'px'; p.style.top = e.clientY + 'px';
+    const dx = (Math.random() - 0.5) * 160 + 'px';
+    const dy = (Math.random() - 0.5) * 160 + 'px';
+    p.style.setProperty('--dx', dx); p.style.setProperty('--dy', dy);
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 800);
+  }
+}
+</script>
+</body>
+</html>
+ 
